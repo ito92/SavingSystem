@@ -565,7 +565,7 @@ namespace DaBois.Saving
         /// <param name="saved">Array saved on disk or memory</param>
         /// <param name="original">Original array with correct size</param>
         /// <returns></returns>
-        public T[] NormalizeSaveableArray<T>(SaveablePropertyBase<T> saveable, T[] saved, T[] original)
+        public T[] NormalizeSaveableArray<T>(SaveablePropertyBase<T[]> saveable, T[] saved, T[] original)
         {
             if (DataExist(saveable))
             {
