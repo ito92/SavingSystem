@@ -1,0 +1,25 @@
+{
+  "name": "com.dabois.savingsystem",
+  "version": "1.0.0",
+  "displayName": "Saving System",
+  "unity": "2020.1",
+  "description": "Utility to manage save files",
+  "keywords": [
+    "Utilities",
+	"Saving"
+  ],
+  "author": {
+    "name": "Miguel Torres",
+    "email": "mix0204@gmail.com",
+    "url": ""
+  },
+  "type": "library",
+  "samples": [
+   {
+     "displayName": "Example Usage",
+     "description": "Simple Scene and Script using the utility",
+     "path": "Samples~"
+
+   }
+ ]
+}

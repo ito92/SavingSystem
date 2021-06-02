@@ -1,0 +1,17 @@
+{
+    "name": "com.DaBois.SaveSystem.Editor.asmdef",
+    "references": [
+        "GUID:0c9a1cc96bf75064c8e26f48aa9d8c87"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
