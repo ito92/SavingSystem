@@ -64,9 +64,10 @@ namespace DaBois.Saving
         protected abstract void SaveInternal(ref SaverInterface saver);
 
         #region Editor
-
+#if UNITY_EDITOR
         public abstract void DrawDebug();
+#endif
 
-        #endregion
+#endregion
     }
 }
