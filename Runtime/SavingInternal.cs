@@ -13,6 +13,11 @@ namespace DaBois.Saving
 
         private static FileStream GetOrCreateFile(string filePath)
         {
+            string directory = Path.GetDirectoryName(filePath);
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
             return File.Open(filePath, FileMode.OpenOrCreate, FileAccess.Write);
         }
 
