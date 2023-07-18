@@ -229,6 +229,18 @@ namespace DaBois.Saving
                 return false;
             }
 
+            public bool TryGet(string key, out byte value)
+            {
+                if (_ints.TryGetValue(key, out int val))
+                {
+                    value = (byte)val;
+                    return true;
+                }
+
+                value = 0;
+                return false;
+            }
+
             public bool TryGet(string key, out bool value)
             {
                 if (_bools.TryGetValue(key, out value))
@@ -296,7 +308,7 @@ namespace DaBois.Saving
 
                 value = new int[0];
                 return false;
-            }
+            }            
 
             public bool TryGet(string key, out bool[] value)
             {
