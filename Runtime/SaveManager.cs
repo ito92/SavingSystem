@@ -155,7 +155,18 @@ namespace DaBois.Saving
 
             public JsonableData(string json)
             {
-                JsonUtility.FromJson<JsonableData>(json);
+                JsonableData newData = JsonUtility.FromJson<JsonableData>(json);
+
+                _strings = newData._strings;
+                _ints = newData._ints;
+                _bools = newData._bools;
+                _doubles = newData._doubles;
+                _vectors = newData._vectors;
+                _stringArrays = newData._stringArrays;
+                _intArrays = newData._intArrays;
+                _boolArrays = newData._boolArrays;
+                _doubleArrays = newData._doubleArrays;
+                _dictionaries = newData._dictionaries;
 
                 UpdateDictionary(_strings, _stringsR);
                 UpdateDictionary(_ints, _intsR);
