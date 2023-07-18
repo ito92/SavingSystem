@@ -1,6 +1,6 @@
 {
   "name": "com.dabois.savingsystem",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "displayName": "Saving System",
   "unity": "2020.1",
   "description": "Utility to manage save files",

@@ -10,7 +10,7 @@ namespace DaBois.Saving
         [System.Serializable]
         public class JsonableData
         {
-            [System.Serializable]
+            /*[System.Serializable]
             public class JsonableBase
             {
                 public string Key;
@@ -102,26 +102,38 @@ namespace DaBois.Saving
                     Value = value;
                 }
             }
+            [System.Serializable]
+            public class JsonableDictionary : JsonableBase
+            {
+                public Dictionary<string, string> Value;
+                public JsonableDictionary(string key, Dictionary<string, string> value) : base(key)
+                {
+                    Value = value;
+                }
+            }
+            */
 
             [SerializeField]
-            private List<JsonableString> _strings = new List<JsonableString>();
+            private Dictionary<string, string> _strings = new Dictionary<string, string>();
             [SerializeField]
-            private List<JsonableInt> _ints = new List<JsonableInt>();
+            private Dictionary<string, int> _ints = new Dictionary<string, int>();
             [SerializeField]
-            private List<JsonableBool> _bools = new List<JsonableBool>();
+            private Dictionary<string, bool> _bools = new Dictionary<string, bool>();
             [SerializeField]
-            private List<JsonableDouble> _doubles = new List<JsonableDouble>();
+            private Dictionary<string, double> _doubles = new Dictionary<string, double>();
             [SerializeField]
-            private List<JsonableVector> _vectors = new List<JsonableVector>();
+            private Dictionary<string, Vector3> _vectors = new Dictionary<string, Vector3>();
 
             [SerializeField]
-            private List<JsonableStringArray> _stringArrays = new List<JsonableStringArray>();
+            private Dictionary<string, string[]> _stringArrays = new Dictionary<string, string[]>();
             [SerializeField]
-            private List<JsonableIntArray> _intArrays = new List<JsonableIntArray>();
+            private Dictionary<string, int[]> _intArrays = new Dictionary<string, int[]>();
             [SerializeField]
-            private List<JsonableBoolArray> _boolArrays = new List<JsonableBoolArray>();
+            private Dictionary<string, bool[]> _boolArrays = new Dictionary<string, bool[]>();
             [SerializeField]
-            private List<JsonableDoubleArray> _doubleArrays = new List<JsonableDoubleArray>();
+            private Dictionary<string, double[]> _doubleArrays = new Dictionary<string, double[]>();
+            [SerializeField]
+            private Dictionary<string, Dictionary<string, string>> _dictionaries = new Dictionary<string, Dictionary<string, string>>();
 
             public JsonableData()
             {
@@ -135,40 +147,40 @@ namespace DaBois.Saving
 
             public void Add(string key, string value)
             {
-                _strings.Add(new JsonableString(key, value));
+                _strings.Add(key, value);
             }
             public void Add(string key, int value)
             {
-                _ints.Add(new JsonableInt(key, value));
+                _ints.Add(key, value);
             }
             public void Add(string key, bool value)
             {
-                _bools.Add(new JsonableBool(key, value));
+                _bools.Add(key, value);
             }
             public void Add(string key, double value)
             {
-                _doubles.Add(new JsonableDouble(key, value));
+                _doubles.Add(key, value);
             }
             public void Add(string key, Vector3 value)
             {
-                _vectors.Add(new JsonableVector(key, value));
+                _vectors.Add(key, value);
             }
 
             public void Add(string key, string[] value)
             {
-                _stringArrays.Add(new JsonableStringArray(key, value));
+                _stringArrays.Add(key, value);
             }
             public void Add(string key, int[] value)
             {
-                _intArrays.Add(new JsonableIntArray(key, value));
+                _intArrays.Add(key, value);
             }
             public void Add(string key, bool[] value)
             {
-                _boolArrays.Add(new JsonableBoolArray(key, value));
+                _boolArrays.Add(key, value);
             }
             public void Add(string key, double[] value)
             {
-                _doubleArrays.Add(new JsonableDoubleArray(key, value));
+                _doubleArrays.Add(key, value);
             }
             public void Add(string key, float[] value)
             {
@@ -178,7 +190,7 @@ namespace DaBois.Saving
                     casted[i] = (double)value[i];
                 }
 
-                _doubleArrays.Add(new JsonableDoubleArray(key, casted));
+                _doubleArrays.Add(key, casted);
             }
             public void Add(string key, long[] value)
             {
@@ -188,18 +200,18 @@ namespace DaBois.Saving
                     casted[i] = (double)value[i];
                 }
 
-                _doubleArrays.Add(new JsonableDoubleArray(key, casted));
+                _doubleArrays.Add(key, casted);
+            }
+            public void Add(string key, Dictionary<string, string> value)
+            {
+                _dictionaries.Add(key, value);
             }
 
             public bool TryGet(string key, out string value)
             {
-                for (int i = 0; i < _strings.Count; i++)
+                if(_strings.TryGetValue(key, out value))
                 {
-                    if (_strings[i].Key == key)
-                    {
-                        value = _strings[i].Value;
-                        return true;
-                    }
+                    return true;
                 }
 
                 value = "";
@@ -208,13 +220,9 @@ namespace DaBois.Saving
 
             public bool TryGet(string key, out int value)
             {
-                for (int i = 0; i < _ints.Count; i++)
+                if (_ints.TryGetValue(key, out value))
                 {
-                    if (_ints[i].Key == key)
-                    {
-                        value = _ints[i].Value;
-                        return true;
-                    }
+                    return true;
                 }
 
                 value = 0;
@@ -223,13 +231,9 @@ namespace DaBois.Saving
 
             public bool TryGet(string key, out bool value)
             {
-                for (int i = 0; i < _bools.Count; i++)
+                if (_bools.TryGetValue(key, out value))
                 {
-                    if (_bools[i].Key == key)
-                    {
-                        value = _bools[i].Value;
-                        return true;
-                    }
+                    return true;
                 }
 
                 value = false;
@@ -238,13 +242,9 @@ namespace DaBois.Saving
 
             public bool TryGet(string key, out double value)
             {
-                for (int i = 0; i < _doubles.Count; i++)
+                if (_doubles.TryGetValue(key, out value))
                 {
-                    if (_doubles[i].Key == key)
-                    {
-                        value = _doubles[i].Value;
-                        return true;
-                    }
+                    return true;
                 }
 
                 value = 0;
@@ -253,43 +253,23 @@ namespace DaBois.Saving
 
             public bool TryGet(string key, out float value)
             {
-                for (int i = 0; i < _doubles.Count; i++)
-                {
-                    if (_doubles[i].Key == key)
-                    {
-                        value = (float)_doubles[i].Value;
-                        return true;
-                    }
-                }
-
-                value = 0;
-                return false;
+                bool got = TryGet(key, out double val);
+                value = (float)val;
+                return got;
             }
 
             public bool TryGet(string key, out long value)
             {
-                for (int i = 0; i < _doubles.Count; i++)
-                {
-                    if (_doubles[i].Key == key)
-                    {
-                        value = (long)_doubles[i].Value;
-                        return true;
-                    }
-                }
-
-                value = 0;
-                return false;
+                bool got = TryGet(key, out double val);
+                value = (long)val;
+                return got;
             }
             
             public bool TryGet(string key, out Vector3 value)
             {
-                for (int i = 0; i < _vectors.Count; i++)
+                if (_vectors.TryGetValue(key, out value))
                 {
-                    if (_vectors[i].Key == key)
-                    {
-                        value = (Vector3)_vectors[i].Value;
-                        return true;
-                    }
+                    return true;
                 }
 
                 value = Vector3.zero;
@@ -298,13 +278,9 @@ namespace DaBois.Saving
 
             public bool TryGet(string key, out string[] value)
             {
-                for (int i = 0; i < _stringArrays.Count; i++)
+                if (_stringArrays.TryGetValue(key, out value))
                 {
-                    if (_stringArrays[i].Key == key)
-                    {
-                        value = _stringArrays[i].Value;
-                        return true;
-                    }
+                    return true;
                 }
 
                 value = new string[0];
@@ -313,13 +289,9 @@ namespace DaBois.Saving
 
             public bool TryGet(string key, out int[] value)
             {
-                for (int i = 0; i < _intArrays.Count; i++)
+                if (_intArrays.TryGetValue(key, out value))
                 {
-                    if (_intArrays[i].Key == key)
-                    {
-                        value = _intArrays[i].Value;
-                        return true;
-                    }
+                    return true;
                 }
 
                 value = new int[0];
@@ -328,13 +300,9 @@ namespace DaBois.Saving
 
             public bool TryGet(string key, out bool[] value)
             {
-                for (int i = 0; i < _boolArrays.Count; i++)
+                if (_boolArrays.TryGetValue(key, out value))
                 {
-                    if (_boolArrays[i].Key == key)
-                    {
-                        value = _boolArrays[i].Value;
-                        return true;
-                    }
+                    return true;
                 }
 
                 value = new bool[0];
@@ -343,13 +311,9 @@ namespace DaBois.Saving
 
             public bool TryGet(string key, out double[] value)
             {
-                for (int i = 0; i < _doubleArrays.Count; i++)
+                if (_doubleArrays.TryGetValue(key, out value))
                 {
-                    if (_doubleArrays[i].Key == key)
-                    {
-                        value = _doubleArrays[i].Value;
-                        return true;
-                    }
+                    return true;
                 }
 
                 value = new double[0];
@@ -358,43 +322,34 @@ namespace DaBois.Saving
 
             public bool TryGet(string key, out float[] value)
             {
-                for (int i = 0; i < _doubleArrays.Count; i++)
+                bool got = TryGet(key, out double[] val);
+                value = new float[val.Length];
+                for (int i = 0; i < value.Length; i++)
                 {
-                    if (_doubleArrays[i].Key == key)
-                    {
-                        float[] casted = new float[_doubleArrays[i].Value.Length];
-                        for (int j = 0; j < _doubleArrays[i].Value.Length; j++)
-                        {
-                            casted[j] = (float)_doubleArrays[i].Value[j];
-                        }
-
-                        value = casted;
-                        return true;
-                    }
+                    value[i] = (float)val[i];
                 }
-
-                value = new float[0];
-                return false;
+                return got;
             }
 
             public bool TryGet(string key, out long[] value)
             {
-                for (int i = 0; i < _doubleArrays.Count; i++)
+                bool got = TryGet(key, out double[] val);
+                value = new long[val.Length];
+                for(int i = 0; i < value.Length; i++)
                 {
-                    if (_doubleArrays[i].Key == key)
-                    {
-                        long[] casted = new long[_doubleArrays[i].Value.Length];
-                        for (int j = 0; j < _doubleArrays[j].Value.Length; j++)
-                        {
-                            casted[j] = (long)_doubleArrays[i].Value[j];
-                        }
+                    value[i] = (long)val[i];
+                }
+                return got;
+            }
 
-                        value = casted;
-                        return true;
-                    }
+            public bool TryGet(string key, out Dictionary<string, string> value)
+            {
+                if (_dictionaries.TryGetValue(key, out value))
+                {
+                    return true;
                 }
 
-                value = new long[0];
+                value = new Dictionary<string, string>();
                 return false;
             }
 
