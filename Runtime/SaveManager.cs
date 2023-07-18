@@ -10,130 +10,143 @@ namespace DaBois.Saving
         [System.Serializable]
         public class JsonableData
         {
-            /*[System.Serializable]
-            public class JsonableBase
+            [System.Serializable]
+            public class JsonableBase<T>
             {
                 public string Key;
-                public JsonableBase(string key)
+                public T Value;
+
+                public JsonableBase(string key, T value)
                 {
                     Key = key;
-                }
-            }
-
-            [System.Serializable]
-            public class JsonableString : JsonableBase
-            {
-                public string Value;
-                public JsonableString(string key, string value) : base(key)
-                {
-                    Value = value;
-                }
-            }
-            [System.Serializable]
-            public class JsonableInt : JsonableBase
-            {
-                public int Value;
-                public JsonableInt(string key, int value) : base(key)
-                {
-                    Value = value;
-                }
-            }
-            [System.Serializable]
-            public class JsonableBool : JsonableBase
-            {
-                public bool Value;
-                public JsonableBool(string key, bool value) : base(key)
-                {
-                    Value = value;
-                }
-            }
-            [System.Serializable]
-            public class JsonableDouble : JsonableBase
-            {
-                public double Value;
-                public JsonableDouble(string key, double value) : base(key)
-                {
-                    Value = value;
-                }
-            }
-            [System.Serializable]
-            public class JsonableVector : JsonableBase
-            {
-                public Vector3 Value;
-                public JsonableVector(string key, Vector3 value) : base(key)
-                {
                     Value = value;
                 }
             }
 
             [System.Serializable]
-            public class JsonableStringArray : JsonableBase
+            public class JsonableString : JsonableBase<string>
             {
-                public string[] Value;
-                public JsonableStringArray(string key, string[] value) : base(key)
+                //public string Value;
+                public JsonableString(string key, string value) : base(key, value)
                 {
-                    Value = value;
+                    //Value = value;
                 }
             }
             [System.Serializable]
-            public class JsonableIntArray : JsonableBase
+            public class JsonableInt : JsonableBase<int>
             {
-                public int[] Value;
-                public JsonableIntArray(string key, int[] value) : base(key)
+                //public int Value;
+                public JsonableInt(string key, int value) : base(key, value)
                 {
-                    Value = value;
+                    //Value = value;
                 }
             }
             [System.Serializable]
-            public class JsonableBoolArray : JsonableBase
+            public class JsonableBool : JsonableBase<bool>
             {
-                public bool[] Value;
-                public JsonableBoolArray(string key, bool[] value) : base(key)
+                //public bool Value;
+                public JsonableBool(string key, bool value) : base(key, value)
                 {
-                    Value = value;
+                    //Value = value;
                 }
             }
             [System.Serializable]
-            public class JsonableDoubleArray : JsonableBase
+            public class JsonableDouble : JsonableBase<double>
             {
-                public double[] Value;
-                public JsonableDoubleArray(string key, double[] value) : base(key)
+                //public double Value;
+                public JsonableDouble(string key, double value) : base(key, value)
                 {
-                    Value = value;
+                    //Value = value;
                 }
             }
             [System.Serializable]
-            public class JsonableDictionary : JsonableBase
+            public class JsonableVector : JsonableBase<Vector3>
             {
-                public Dictionary<string, string> Value;
-                public JsonableDictionary(string key, Dictionary<string, string> value) : base(key)
+                //public Vector3 Value;
+                public JsonableVector(string key, Vector3 value) : base(key, value)
                 {
-                    Value = value;
+                    //Value = value;
                 }
             }
-            */
+
+            [System.Serializable]
+            public class JsonableStringArray : JsonableBase<string[]>
+            {
+                //public string[] Value;
+                public JsonableStringArray(string key, string[] value) : base(key, value)
+                {
+                    //Value = value;
+                }
+            }
+            [System.Serializable]
+            public class JsonableIntArray : JsonableBase<int[]>
+            {
+                //public int[] Value;
+                public JsonableIntArray(string key, int[] value) : base(key, value)
+                {
+                    //Value = value;
+                }
+            }
+            [System.Serializable]
+            public class JsonableBoolArray : JsonableBase<bool[]>
+            {
+                //public bool[] Value;
+                public JsonableBoolArray(string key, bool[] value) : base(key, value)
+                {
+                    //Value = value;
+                }
+            }
+            [System.Serializable]
+            public class JsonableDoubleArray : JsonableBase<double[]>
+            {
+                //public double[] Value;
+                public JsonableDoubleArray(string key, double[] value) : base(key, value)
+                {
+                    //Value = value;
+                }
+            }
+            [System.Serializable]
+            public class JsonableDictionary : JsonableBase<Dictionary<string, string>>
+            {
+                //public Dictionary<string, string> Value;
+                public JsonableDictionary(string key, Dictionary<string, string> value) : base(key, value)
+                {
+                    //Value = value;
+                }
+            }
+            
 
             [SerializeField]
-            private Dictionary<string, string> _strings = new Dictionary<string, string>();
+            private List<JsonableString> _strings = new List<JsonableString>();
+            private Dictionary<string, string> _stringsR = new Dictionary<string, string>();
             [SerializeField]
-            private Dictionary<string, int> _ints = new Dictionary<string, int>();
+            private List<JsonableInt> _ints = new List<JsonableInt>();
+            private Dictionary<string, int> _intsR = new Dictionary<string, int>();
             [SerializeField]
-            private Dictionary<string, bool> _bools = new Dictionary<string, bool>();
+            private List<JsonableBool> _bools = new List<JsonableBool>();
+            private Dictionary<string, bool> _boolsR = new Dictionary<string, bool>();
             [SerializeField]
-            private Dictionary<string, double> _doubles = new Dictionary<string, double>();
+            private List<JsonableDouble> _doubles = new List<JsonableDouble>();
+            private Dictionary<string, double> _doublesR = new Dictionary<string, double>();
             [SerializeField]
-            private Dictionary<string, Vector3> _vectors = new Dictionary<string, Vector3>();
+            private List<JsonableVector> _vectors = new List<JsonableVector>();
+            private Dictionary<string, Vector3> _vectorsR = new Dictionary<string, Vector3>();
 
             [SerializeField]
-            private Dictionary<string, string[]> _stringArrays = new Dictionary<string, string[]>();
+            private List<JsonableStringArray> _stringArrays = new List<JsonableStringArray>();
+            private Dictionary<string, string[]> _stringArraysR = new Dictionary<string, string[]>();
             [SerializeField]
-            private Dictionary<string, int[]> _intArrays = new Dictionary<string, int[]>();
+            private List<JsonableIntArray> _intArrays = new List<JsonableIntArray>();
+            private Dictionary<string, int[]> _intArraysR = new Dictionary<string, int[]>();
             [SerializeField]
-            private Dictionary<string, bool[]> _boolArrays = new Dictionary<string, bool[]>();
+            private List<JsonableBoolArray> _boolArrays = new List<JsonableBoolArray>();
+            private Dictionary<string, bool[]> _boolArraysR = new Dictionary<string, bool[]>();
             [SerializeField]
-            private Dictionary<string, double[]> _doubleArrays = new Dictionary<string, double[]>();
+            private List<JsonableDoubleArray> _doubleArrays = new List<JsonableDoubleArray>();
+            private Dictionary<string, double[]> _doubleArraysR = new Dictionary<string, double[]>();
             [SerializeField]
-            private Dictionary<string, Dictionary<string, string>> _dictionaries = new Dictionary<string, Dictionary<string, string>>();
+            private List<JsonableDictionary> _dictionaries = new List<JsonableDictionary>();
+            private Dictionary<string, Dictionary<string, string>> _dictionariesR = new Dictionary<string, Dictionary<string, string>>();
 
             public JsonableData()
             {
@@ -143,44 +156,72 @@ namespace DaBois.Saving
             public JsonableData(string json)
             {
                 JsonUtility.FromJson<JsonableData>(json);
+
+                UpdateDictionary(_strings, _stringsR);
+                UpdateDictionary(_ints, _intsR);
+                UpdateDictionary(_bools, _boolsR);
+                UpdateDictionary(_doubles, _doublesR);
+                UpdateDictionary(_vectors, _vectorsR);
+                UpdateDictionary(_stringArrays, _stringArraysR);
+                UpdateDictionary(_intArrays, _intArraysR);
+                UpdateDictionary(_boolArrays, _boolArraysR);
+                UpdateDictionary(_doubleArrays, _doubleArraysR);
+                UpdateDictionary(_dictionaries, _dictionariesR);
+            }
+
+            private void UpdateDictionary<T, U>(List<T> jsonable, Dictionary<string, U> dictionary) where T : JsonableBase<U>
+            {
+                foreach (var i in jsonable)
+                {
+                    dictionary.Add(i.Key, i.Value);
+                }
             }
 
             public void Add(string key, string value)
             {
-                _strings.Add(key, value);
+                _strings.Add(new JsonableString(key, value));
+                _stringsR.Add(key, value);
             }
             public void Add(string key, int value)
             {
-                _ints.Add(key, value);
+                _ints.Add(new JsonableInt(key, value));
+                _intsR.Add(key, value);
             }
             public void Add(string key, bool value)
             {
-                _bools.Add(key, value);
+                _bools.Add(new JsonableBool(key, value));
+                _boolsR.Add(key, value);
             }
             public void Add(string key, double value)
             {
-                _doubles.Add(key, value);
+                _doubles.Add(new JsonableDouble(key, value));
+                _doublesR.Add(key, value);
             }
             public void Add(string key, Vector3 value)
             {
-                _vectors.Add(key, value);
+                _vectors.Add(new JsonableVector(key, value));
+                _vectorsR.Add(key, value);
             }
 
             public void Add(string key, string[] value)
             {
-                _stringArrays.Add(key, value);
+                _stringArrays.Add(new JsonableStringArray(key, value));
+                _stringArraysR.Add(key, value);
             }
             public void Add(string key, int[] value)
             {
-                _intArrays.Add(key, value);
+                _intArrays.Add(new JsonableIntArray(key, value));
+                _intArraysR.Add(key, value);
             }
             public void Add(string key, bool[] value)
             {
-                _boolArrays.Add(key, value);
+                _boolArrays.Add(new JsonableBoolArray(key, value));
+                _boolArraysR.Add(key, value);
             }
             public void Add(string key, double[] value)
             {
-                _doubleArrays.Add(key, value);
+                _doubleArrays.Add(new JsonableDoubleArray(key, value));
+                _doubleArraysR.Add(key, value);
             }
             public void Add(string key, float[] value)
             {
@@ -190,7 +231,8 @@ namespace DaBois.Saving
                     casted[i] = (double)value[i];
                 }
 
-                _doubleArrays.Add(key, casted);
+                _doubleArrays.Add(new JsonableDoubleArray(key, casted));
+                _doubleArraysR.Add(key, casted);
             }
             public void Add(string key, long[] value)
             {
@@ -200,16 +242,18 @@ namespace DaBois.Saving
                     casted[i] = (double)value[i];
                 }
 
-                _doubleArrays.Add(key, casted);
+                _doubleArrays.Add(new JsonableDoubleArray(key, casted));
+                _doubleArraysR.Add(key, casted);
             }
             public void Add(string key, Dictionary<string, string> value)
             {
-                _dictionaries.Add(key, value);
+                _dictionaries.Add(new JsonableDictionary(key, value));
+                _dictionariesR.Add(key, value);
             }
 
             public bool TryGet(string key, out string value)
             {
-                if(_strings.TryGetValue(key, out value))
+                if(_stringsR.TryGetValue(key, out value))
                 {
                     return true;
                 }
@@ -220,7 +264,7 @@ namespace DaBois.Saving
 
             public bool TryGet(string key, out int value)
             {
-                if (_ints.TryGetValue(key, out value))
+                if (_intsR.TryGetValue(key, out value))
                 {
                     return true;
                 }
@@ -231,7 +275,7 @@ namespace DaBois.Saving
 
             public bool TryGet(string key, out byte value)
             {
-                if (_ints.TryGetValue(key, out int val))
+                if (_intsR.TryGetValue(key, out int val))
                 {
                     value = (byte)val;
                     return true;
@@ -243,7 +287,7 @@ namespace DaBois.Saving
 
             public bool TryGet(string key, out bool value)
             {
-                if (_bools.TryGetValue(key, out value))
+                if (_boolsR.TryGetValue(key, out value))
                 {
                     return true;
                 }
@@ -254,7 +298,7 @@ namespace DaBois.Saving
 
             public bool TryGet(string key, out double value)
             {
-                if (_doubles.TryGetValue(key, out value))
+                if (_doublesR.TryGetValue(key, out value))
                 {
                     return true;
                 }
@@ -279,7 +323,7 @@ namespace DaBois.Saving
             
             public bool TryGet(string key, out Vector3 value)
             {
-                if (_vectors.TryGetValue(key, out value))
+                if (_vectorsR.TryGetValue(key, out value))
                 {
                     return true;
                 }
@@ -290,7 +334,7 @@ namespace DaBois.Saving
 
             public bool TryGet(string key, out string[] value)
             {
-                if (_stringArrays.TryGetValue(key, out value))
+                if (_stringArraysR.TryGetValue(key, out value))
                 {
                     return true;
                 }
@@ -301,7 +345,7 @@ namespace DaBois.Saving
 
             public bool TryGet(string key, out int[] value)
             {
-                if (_intArrays.TryGetValue(key, out value))
+                if (_intArraysR.TryGetValue(key, out value))
                 {
                     return true;
                 }
@@ -312,7 +356,7 @@ namespace DaBois.Saving
 
             public bool TryGet(string key, out bool[] value)
             {
-                if (_boolArrays.TryGetValue(key, out value))
+                if (_boolArraysR.TryGetValue(key, out value))
                 {
                     return true;
                 }
@@ -323,7 +367,7 @@ namespace DaBois.Saving
 
             public bool TryGet(string key, out double[] value)
             {
-                if (_doubleArrays.TryGetValue(key, out value))
+                if (_doubleArraysR.TryGetValue(key, out value))
                 {
                     return true;
                 }
@@ -356,7 +400,7 @@ namespace DaBois.Saving
 
             public bool TryGet(string key, out Dictionary<string, string> value)
             {
-                if (_dictionaries.TryGetValue(key, out value))
+                if (_dictionariesR.TryGetValue(key, out value))
                 {
                     return true;
                 }
