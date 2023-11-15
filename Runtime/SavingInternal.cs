@@ -40,7 +40,19 @@ namespace DaBois.Saving
                     string rKey = reader.ReadString();
                     int size = reader.ReadInt32();
                     byte[] rValue = reader.ReadBytes(size);
-                    savedKeys.Add(rKey, rValue);
+
+                    if (string.IsNullOrWhiteSpace(rKey))
+                    {
+                        UnityEngine.Debug.LogWarning("Skipping empty key: " + rKey + ", Value: " + rValue);
+                    }
+                    else if (savedKeys.ContainsKey(rKey))
+                    {
+                        UnityEngine.Debug.LogWarning("Skipping duplicate key: " + rKey + ", Value: " + rValue);
+                    }
+                    else
+                    {
+                        savedKeys.Add(rKey, rValue);
+                    }
                 }
             }
 
