@@ -567,7 +567,14 @@ namespace DaBois.Saving
 
             if (_autoLoad)
             {
-                Load();
+                try{
+                    Load();
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.LogError(ex.Message)
+                }
+
             }
 
             _loadDate = _updateDate.Value;
