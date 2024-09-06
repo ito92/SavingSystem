@@ -572,7 +572,7 @@ namespace DaBois.Saving
                 }
                 catch (System.Exception ex)
                 {
-                    Debug.LogError(ex.Message)
+                    Debug.LogError(ex.Message);
                 }
 
             }
