@@ -242,11 +242,16 @@ namespace DaBois.Saving
                     }
 
                     writer.Flush();
-                }
 
-                // To the disk itself, not only to whatever the system is
-                // holding: a machine losing power should not lose the save.
-                file.Flush(true);
+                    // To the disk itself, not only to whatever the system is
+                    // holding: a machine losing power should not lose the
+                    // save.
+                    //
+                    // Inside the writer's block on purpose. Letting go of a
+                    // BinaryWriter closes the stream underneath it, so asking
+                    // the file to flush after that throws instead of saving.
+                    file.Flush(true);
+                }
             }
 
             try
